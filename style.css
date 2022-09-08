@@ -1,0 +1,27 @@
+html{
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    height: 100vh;
+
+
+}
+
+
+button{
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+
+}
+
+.display{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 145px;
+    margin: 5px;
+    border: 2px solid gray;
+
+}
