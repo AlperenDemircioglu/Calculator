@@ -1,4 +1,6 @@
-
+const display = document.querySelector(".display");
+const btn = document.querySelector("button");
+const numbers = document.querySelectorAll(".numbers");
 
 
 function add(a,b) {
@@ -35,3 +37,12 @@ function operate(a, b, operator){
         return divide(a,b);
     }
 }
+
+function displayInput(e){
+    display.textContent = e.srcElement.innerText;
+
+}
+btn.addEventListener("click", displayInput);
+
+
+
