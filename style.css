@@ -23,5 +23,6 @@ button{
     width: 145px;
     margin: 5px;
     border: 2px solid gray;
+    font-weight: bold;
 
 }

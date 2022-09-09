@@ -1,7 +1,9 @@
 const display = document.querySelector(".display");
 const btn = document.querySelectorAll("button");
 const numbers = document.querySelectorAll(".numbers");
-
+const clearBtn = document.querySelector("#clear");
+const equals = document.querySelector("#equals");
+const currentOperator = document.querySelectorAll("#operator")
 
 function add(a,b) {
     return a + b;
@@ -20,25 +22,55 @@ function divide(a,b) {
 }
 
 function operate(a, b, operator){
-    if (operator == "add"){
+    if (operator == "+"){
         return add(a,b);
     }
-    else if (operator == "subtract"){
+    else if (operator == "-"){
         return subtract(a,b);
     }
-    else if (operator == "multiply"){
+    else if (operator == "*"){
         return multiply(a,b);
     }
-    else if (operator == "divide"){
+    else if (operator == "/"){
         return divide(a,b);
     }
-}
 
+}
+function clear() {
+    display.textContent = "";
+}
 function displayInput(e){
-    display.textContent = e.srcElement.innerText;
+    if(e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && parseInt(display.textContent)== 0){
+        display.textContent = e.srcElement.innerText;
+    }
+    else if (e.srcElement.innerText != "clear" && e.srcElement.innerText !="="){
+        display.textContent += e.srcElement.innerText;
+    }
 
 }
+function transformInput(){
+    let displayStr = display.textContent;
+    let arrStr = displayStr.split(/\D+/);
+    let operator = operatorInUse;
+    console.log(arrStr[0]);
+    console.log(arrStr[1]);
+    console.log(operator);
+    display.textContent = operate(parseInt(arrStr[0]), parseInt(arrStr[1]), operator);
+
+}
+let operatorInUse;
+
+function setCurrentOperator(e){
+    operatorInUse = e.srcElement.innerText;
+
+}
+currentOperator.forEach(e => e.addEventListener("click", setCurrentOperator));
+
 btn.forEach((button) => button.addEventListener("click", displayInput));
+
+clearBtn.addEventListener("click", clear);
+
+equals.addEventListener("click", transformInput);
 
 
 
