@@ -1,3 +1,4 @@
+// I. Section: DOM Links
 const display = document.querySelector(".display");
 const btn = document.querySelectorAll("button");
 const numbers = document.querySelectorAll(".numbers");
@@ -5,6 +6,7 @@ const clearBtn = document.querySelector("#clear");
 const equals = document.querySelector("#equals");
 const currentOperator = document.querySelectorAll("#operator")
 
+// II. Section: Calculation functions
 function add(a,b) {
     return a + b;
 }
@@ -21,6 +23,7 @@ function divide(a,b) {
     return a/b;
 }
 
+// III. Section: Chooser function
 function operate(a, b, operator){
     if (operator == "+"){
         return add(a,b);
@@ -34,8 +37,10 @@ function operate(a, b, operator){
     else if (operator == "/"){
         return divide(a,b);
     }
-
 }
+
+// IV. Section: Event Listener functions
+
 function clear() {
     display.textContent = "";
 }
@@ -58,15 +63,7 @@ function transformInput(){
     display.textContent = operate(parseInt(arrStr[0]), parseInt(arrStr[1]), operator);
 
 }
-/* let operatorInUse;
-
-function setCurrentOperator(){
-    operatorInUse = display.textContent.split((/[0-9]/gm)).filter(a => a != "");
-
-}
-*/
- // currentOperator.forEach(e => e.addEventListener("click", setCurrentOperator));
-
+// V. Section: Event listeners
 btn.forEach((button) => button.addEventListener("click", displayInput));
 
 clearBtn.addEventListener("click", clear);
