@@ -55,12 +55,13 @@ function displayInput(e){
 }
 function transformInput(){
     let displayStr = display.textContent;
-    let arrStr = displayStr.split(/[^0-9]/gm);
-    let operator = display.textContent.split((/[0-9]/gm)).filter(a => a != "");
+    let arrStr = displayStr.split(/[*/]|[+-]/gm);
+    console.log(arrStr);
+    let operator = display.textContent.split((/[0-9]/gm)).filter(a => a != "" && a!=".");
     console.log(arrStr[0]);
     console.log(arrStr[1]);
     console.log(operator);
-    display.textContent = operate(parseInt(arrStr[0]), parseInt(arrStr[1]), operator);
+    display.textContent = operate(parseFloat(arrStr[0]), parseFloat(arrStr[1]), operator);
 
 }
 // V. Section: Event listeners
