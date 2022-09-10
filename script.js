@@ -53,15 +53,42 @@ function displayInput(e){
     }
 
 }
+
+
 function transformInput(){
     let displayStr = display.textContent;
     let arrStr = displayStr.split(/[*/]|[+-]/gm);
     console.log(arrStr);
     let operator = display.textContent.split((/[0-9]/gm)).filter(a => a != "" && a!=".");
-    console.log(arrStr[0]);
-    console.log(arrStr[1]);
     console.log(operator);
-    display.textContent = operate(parseFloat(arrStr[0]), parseFloat(arrStr[1]), operator);
+    let result = 0;
+    for( i = 0; i < operator.length; i++){      
+        if((operator.indexOf("*")+1) == true){
+            result += operate(parseFloat(arrStr[operator.indexOf("*")]),parseFloat(arrStr[operator.indexOf("*")+1]),"*");
+            console.log(result);
+            arrStr.splice(operator.indexOf("*"), 1, result);
+        }
+        else if((operator.indexOf("/")+1) == true){
+            result += operate(parseFloat(arrStr[operator.indexOf("/")]),parseFloat(arrStr[operator.indexOf("/")+1]),"/");
+            console.log(result);
+            arrStr.splice(operator.indexOf("/"), 1, result);
+        }
+        else if((operator.indexOf("+")+1) == true){
+            result += operate(parseFloat(arrStr[operator.indexOf("+")]),parseFloat(arrStr[operator.indexOf("+")+1]),"+");
+            console.log(result);
+            arrStr = arrStr.splice(operator.indexOf("+"), 1, result);
+            console.log(arrStr);
+        }
+        else if((operator.indexOf("-")+1) == true){
+            result += operate(parseFloat(arrStr[operator.indexOf("-")]),parseFloat(arrStr[operator.indexOf("-")+1]),"-");
+            console.log(result);
+            arrStr.splice(operator.indexOf("-"), 1, result);
+        }
+        operator.splice(0, 1);
+
+    }
+    display.textContent = result;
+
 
 }
 // V. Section: Event listeners
