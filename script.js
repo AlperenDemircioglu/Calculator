@@ -50,21 +50,22 @@ function displayInput(e){
 }
 function transformInput(){
     let displayStr = display.textContent;
-    let arrStr = displayStr.split(/\D+/);
-    let operator = operatorInUse;
+    let arrStr = displayStr.split(/[^0-9]/gm);
+    let operator = display.textContent.split((/[0-9]/gm)).filter(a => a != "");
     console.log(arrStr[0]);
     console.log(arrStr[1]);
     console.log(operator);
     display.textContent = operate(parseInt(arrStr[0]), parseInt(arrStr[1]), operator);
 
 }
-let operatorInUse;
+/* let operatorInUse;
 
-function setCurrentOperator(e){
-    operatorInUse = e.srcElement.innerText;
+function setCurrentOperator(){
+    operatorInUse = display.textContent.split((/[0-9]/gm)).filter(a => a != "");
 
 }
-currentOperator.forEach(e => e.addEventListener("click", setCurrentOperator));
+*/
+ // currentOperator.forEach(e => e.addEventListener("click", setCurrentOperator));
 
 btn.forEach((button) => button.addEventListener("click", displayInput));
 
