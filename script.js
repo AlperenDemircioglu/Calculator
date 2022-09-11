@@ -5,6 +5,8 @@ const numbers = document.querySelectorAll(".numbers");
 const clearBtn = document.querySelector("#clear");
 const equals = document.querySelector("#equals");
 
+
+
 // II. Section: Calculation functions
 function add(a,b) {
     return a + b;
@@ -107,16 +109,18 @@ function transformInput(){
         }
     }
     display.textContent = Math.round(result*100)/100;
-
-
 }
-function linkButtons(){
 
+function linkButtons(e){
+    console.log(e);
+    //Reference: Make a JavaScript Drum Kit in Vanilla JS!
+    document.querySelector(`button[data-key="${e.key}"]`).click();
 
 }
 
 // V. Section: Event listeners
 btn.forEach((button) => button.addEventListener("click", displayInput));
+
 
 clearBtn.addEventListener("click", clear);
 
