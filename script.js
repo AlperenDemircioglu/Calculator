@@ -45,7 +45,18 @@ function clear() {
     display.textContent = "";
 }
 function displayInput(e){
-    if(e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && parseInt(display.textContent)== 0){
+    let operatorArr = ["+", "-", "*", "/"];
+    console.log(e)
+    if(operatorArr.includes(e.srcElement.innerText) && operatorArr.includes(display.textContent[display.textContent.length-1])) {
+        console.log(e.srcElement.innerText);
+        display.textContent = display.textContent.slice(0,-1);
+        display.textContent += e.srcElement.innerText;
+    }
+    else if (operatorArr.includes(e.srcElement.innerText) && display.textContent == "0") {
+        
+    }
+
+    else if(e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && parseInt(display.textContent)== 0 ){
         display.textContent = e.srcElement.innerText;
     }
     else if (e.srcElement.innerText != "clear" && e.srcElement.innerText !="="){
@@ -54,38 +65,45 @@ function displayInput(e){
 
 }
 
-
 function transformInput(){
     let displayStr = display.textContent;
     let arrStr = displayStr.split(/[*/]|[+-]/gm);
-    console.log(arrStr);
+    console.log("arrStr"+ arrStr);
     let operator = display.textContent.split((/[0-9]/gm)).filter(a => a != "" && a!=".");
-    console.log(operator);
+    console.log("operator length"+ operator.length);
+    let index;
     let result = 0;
-    for( i = 0; i < operator.length; i++){      
+    const  length = operator.length;
+    for( i = 0; i < length; i++){
+        console.log(arrStr);      
         if((operator.indexOf("*")+1) == true){
-            result += operate(parseFloat(arrStr[operator.indexOf("*")]),parseFloat(arrStr[operator.indexOf("*")+1]),"*");
-            console.log(result);
-            arrStr.splice(operator.indexOf("*"), 1, result);
+            index = operator.indexOf("*");
+            result= operate(parseFloat(arrStr[index]),parseFloat(arrStr[index+1]),"*");
+            arrStr.splice(index, 2, result);
+            operator.splice(index,1);
+            continue
         }
         else if((operator.indexOf("/")+1) == true){
-            result += operate(parseFloat(arrStr[operator.indexOf("/")]),parseFloat(arrStr[operator.indexOf("/")+1]),"/");
-            console.log(result);
-            arrStr.splice(operator.indexOf("/"), 1, result);
+            index = operator.indexOf("/");
+            result = operate(parseFloat(arrStr[index]),parseFloat(arrStr[index+1]),"/");
+            arrStr.splice(index, 2, result);
+            operator.splice(index,1);
+            continue
         }
         else if((operator.indexOf("+")+1) == true){
-            result += operate(parseFloat(arrStr[operator.indexOf("+")]),parseFloat(arrStr[operator.indexOf("+")+1]),"+");
-            console.log(result);
-            arrStr = arrStr.splice(operator.indexOf("+"), 1, result);
-            console.log(arrStr);
+            index = operator.indexOf("+");
+            result = operate(parseFloat(arrStr[index]),parseFloat(arrStr[index+1]),"+");
+            arrStr.splice(index, 2, result);
+            operator = operator.splice(index,1);
+            continue
         }
         else if((operator.indexOf("-")+1) == true){
-            result += operate(parseFloat(arrStr[operator.indexOf("-")]),parseFloat(arrStr[operator.indexOf("-")+1]),"-");
-            console.log(result);
-            arrStr.splice(operator.indexOf("-"), 1, result);
+            index = operator.indexOf("-");
+            result= operate(parseFloat(arrStr[index]),parseFloat(arrStr[index+1]),"-");
+            arrStr.splice(index, 2, result);
+            operator.splice(index,1);
+            continue
         }
-        operator.splice(0, 1);
-
     }
     display.textContent = result;
 
