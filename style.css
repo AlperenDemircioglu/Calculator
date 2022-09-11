@@ -6,8 +6,8 @@ html{
 }
 
 button{
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     margin: 5px;
     text-align: center;
 }
@@ -17,7 +17,7 @@ button{
     align-items: center;
     justify-content: center;
     height: 40px;
-    width: 200px;
+    width: 220px;
     margin: 5px;
     border: 2px solid gray;
     font-size: 24px;
@@ -34,5 +34,20 @@ button{
     border: 2px solid gray;
     width: 240px;
     height: 370px;
+    padding: 20px;
+
+}
+
+#backspace, #point {
+    width: 104px;
+    height: 40px;
+
+}
+
+.top{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex: 1;
 
 }

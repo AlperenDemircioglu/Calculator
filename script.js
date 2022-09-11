@@ -4,7 +4,8 @@ const btn = document.querySelectorAll("button");
 const numbers = document.querySelectorAll(".numbers");
 const clearBtn = document.querySelector("#clear");
 const equals = document.querySelector("#equals");
-const currentOperator = document.querySelectorAll("#operator")
+const backSpace = document.querySelector("#backspace");
+const point = document.querySelector("#point");
 
 // II. Section: Calculation functions
 function add(a,b) {
@@ -47,19 +48,21 @@ function clear() {
 function displayInput(e){
     let operatorArr = ["+", "-", "*", "/"];
     console.log(e)
-    if(operatorArr.includes(e.srcElement.innerText) && operatorArr.includes(display.textContent[display.textContent.length-1])) {
+    if(e.srcElement.innerText == "Backspace" && display.textContent != "0"){
+        display.textContent = display.textContent.slice(0,-1);
+    }
+
+    else if(operatorArr.includes(e.srcElement.innerText) && operatorArr.includes(display.textContent[display.textContent.length-1])) {
         console.log(e.srcElement.innerText);
         display.textContent = display.textContent.slice(0,-1);
         display.textContent += e.srcElement.innerText;
     }
-    else if (operatorArr.includes(e.srcElement.innerText) && display.textContent == "0") {
-        
+    else if (operatorArr.includes(e.srcElement.innerText) && display.textContent == "0") {   
     }
-
-    else if(e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && parseInt(display.textContent)== 0 ){
+    else if(e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && parseInt(display.textContent)== 0 && e.srcElement.innerText != "Backspace"){
         display.textContent = e.srcElement.innerText;
     }
-    else if (e.srcElement.innerText != "clear" && e.srcElement.innerText !="="){
+    else if (e.srcElement.innerText != "clear" && e.srcElement.innerText !="=" && e.srcElement.innerText != "Backspace"){
         display.textContent += e.srcElement.innerText;
     }
 
@@ -105,16 +108,23 @@ function transformInput(){
             continue
         }
     }
-    display.textContent = result;
+    display.textContent = Math.round(result*100)/100;
 
 
 }
+function linkButtons(){
+
+
+}
+
 // V. Section: Event listeners
 btn.forEach((button) => button.addEventListener("click", displayInput));
 
 clearBtn.addEventListener("click", clear);
 
 equals.addEventListener("click", transformInput);
+
+document.body.addEventListener("keydown", linkButtons);
 
 
 
