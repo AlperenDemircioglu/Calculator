@@ -4,8 +4,6 @@ const btn = document.querySelectorAll("button");
 const numbers = document.querySelectorAll(".numbers");
 const clearBtn = document.querySelector("#clear");
 const equals = document.querySelector("#equals");
-const backSpace = document.querySelector("#backspace");
-const point = document.querySelector("#point");
 
 // II. Section: Calculation functions
 function add(a,b) {
